@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# React/Next.js, TypeScript, Scss, GitHub, VSCodeの環境用のテンプレート
 
-## Getting Started
-
-First, run the development server:
-
+## プロジェクト作成
+### React + TypeScript
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm create vite@latest my-react-app --template react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Next.js + TypeScript
+```bash
+npx create-next-app@latest --ts
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ESLint
+```bash
+npm install --save-dev eslint-plugin-react
+```
+`.eslintrc.json`, `.eslintignore`を追加
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Prettier
+```bash
+npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+```
+`.prettierrc`, `.prettierignore`を追加
 
-## Learn More
+## Scss
+```bash
+npm install --save-dev sass
+```
+ファイル名を`.css`から`.scss`に変更
 
-To learn more about Next.js, take a look at the following resources:
+## Stylelint
+```bash
+npm install --save-dev stylelint stylelint-config-standard stylelint-scss stylelint-config-recess-order
+```
+`.stylelintrc.json`を追加
+- scssファイルのlint
+- cssのプロパティの順番を自動で整列
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Package.json
+以下はNext.jsの場合
+```json
+  "scripts": {
+    "dev": "npm i && next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write ."
+  },
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+`dev`に`npn i`を入れておくと、package関連に変更がある時でも気にせずに使用できる
 
-## Deploy on Vercel
+## VSCode
+`.vscode/settings.json`, `.vscode/extensions.json`を追加
+- セーブ時に自動でフォーマットするように設定
+- おすすめの拡張機能を追加(拡張機能タブで`@recommended`で検索)
+- importの並び替えと自動追加・削除
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## GitHub
+`.github\PULL_REQUEST_TEMPLATE.md`を追加
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Next.jsで静的エクスポートを使用する場合
+`next.config.ts`に以下を追加
+```ts
+module.exports = {
+  output: "export",
+  trailingSlash: true,
+}
+```
+```bash
+npm run build
+```
